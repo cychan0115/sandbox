@@ -11,6 +11,8 @@ from apps.sitemaps import base_sitemaps
 
 from apps.myclass.profits_user import test
 
+from apps.myclass.urltest import urltest
+
 admin.autodiscover()
 
 urlpatterns = [
@@ -20,17 +22,17 @@ urlpatterns = [
     # i18n URLS need to live outside of i18n_patterns scope of Oscar
     # url(r'^i18n/', include('django.conf.urls.i18n')),
     # include a basic sitemap
-    # url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {
+    #url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {
     #     'sitemaps': base_sitemaps}),
-    # url(r'^sitemap-(?P<section>.+)\.xml$',
+    #url(r'^sitemap-(?P<section>.+)\.xml$',
     #     'django.contrib.sitemaps.views.sitemap', {'sitemaps': base_sitemaps}),
     url(r'gateway/', include('apps.gateway.urls')),
     url(r'', include(application.urls)),
-    url(r'test_profits/', test )
+    url(r'^cytest/(\w+)/$',test),
 ]
 
 # Prefix Oscar URLs with language codes
-# urlpatterns += i18n_patterns('',
+#  urlpatterns += i18n_patterns('',
     # Custom functionality to allow dashboard users to be created
     # url(r'gateway/', include('apps.gateway.urls')),
     # Oscar's normal URLs
@@ -38,7 +40,9 @@ urlpatterns = [
 # )
 
 
-
+# urlpatterns +=urltest(
+#     url(r'^user/(\d+)$',test),
+# )
 
 if settings.DEBUG:
     import debug_toolbar
